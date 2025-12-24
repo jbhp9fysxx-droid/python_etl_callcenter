@@ -24,18 +24,29 @@ separation of concerns.
 
 ## Architecture
 **Execution flow:**
-Source File
-↓
-File Validation
-↓
+
+The pipeline follows a validation-first, routing-second design:
+
+```text
+Source CSV
+   |
+   v
+File-Level Validation
+(filename, extension)
+   |
+   v
 Header / Schema Validation
-↓
+(column count, order, names)
+   |
+   v
 Row-Level Validation
-↓
-┌───────────────┬────────────────┐
-│ Valid Records │ Invalid Records│
-│ → Target CSV │ → Exception CSV│
-└───────────────┴────────────────┘
+(mandatory fields, time format, IDs, status)
+   |
+   v
+Record Routing
+   ├── Valid Records   → Target CSV
+   └── Invalid Records → Exception CSV (with reject reason)
+
 ---
 
 ## Project Structure
