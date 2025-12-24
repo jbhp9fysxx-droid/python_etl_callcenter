@@ -1,0 +1,42 @@
+{
+  "pipeline": {
+    "name": "call_center_etl",
+    "environment": "dev"
+  },
+
+  "paths": {
+    "source_dir": "/Users/Vinay/Python_training/python_etl_callcenter/src_files",
+    "source_filename": "call_center_raw.csv",
+
+    "target_dir": "/Users/Vinay/Python_training/python_etl_callcenter/output/target",
+    "target_filename": "call_center_clean.csv",
+
+    "exception_dir": "/Users/Vinay/Python_training/python_etl_callcenter/output/exception",
+    "exception_filename": "call_center_reject.csv",
+
+    "log_dir": "/Users/Vinay/Python_training/python_etl_callcenter/logs"
+  },
+
+  "logging": {
+  "default_level": "DEBUG",
+  "separate_debug_logs": true
+},
+
+
+  "file_validation": {
+    "allowed_extensions": [".csv"],
+    "expected_filename_length": 19
+  },
+
+  "schema": {
+    "expected_column_count": 6,
+    "expected_columns": {
+      "call_id":0,
+      "caller_id":1,
+      "agent_id":2,
+      "call_start_time":3,
+      "call_end_time":4,
+      "call_status":5
+    }
+  }
+}

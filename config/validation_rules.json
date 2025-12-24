@@ -1,0 +1,23 @@
+{
+  "mandatory_fields": [
+    "call_id",
+    "call_start_time",
+    "call_end_time",
+    "call_status"
+  ],
+
+  "numeric_fields": [
+    "call_id",
+    "caller_id",
+    "agent_id"
+  ],
+
+  "time_format": {
+    "pattern": "HH:MM:SS",
+    "length": 8
+  },
+
+  "domain_values": {
+    "call_status": ["COMPLETED", "DROPPED", "FAILED"]
+  }
+}
