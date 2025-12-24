@@ -51,7 +51,7 @@ Record Routing
 
 ## Project Structure
 
-```text
+
 python_etl_callcenter/
 │
 ├── scripts/          # Modular, production-ready ETL pipeline
