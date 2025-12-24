@@ -47,10 +47,12 @@ Record Routing
    ├── Valid Records   → Target CSV
    └── Invalid Records → Exception CSV (with reject reason)
 
+```
 ---
 
 ## Project Structure
 
+```text
 
 python_etl_callcenter/
 │
@@ -77,7 +79,7 @@ python_etl_callcenter/
 │
 └── README.md
 
-
+```
 
 ---
 
@@ -130,31 +132,33 @@ Logs are written to the `/logs` directory.
 3. Execute:
 
 ```bash
-python main.py
+python scripts/main.py
+```
+
+## Outputs
+
+- **Target file**  
+  Contains fully validated records
+
+- **Exception file**  
+  Contains rejected records with rejection reasons appended
+
+- **Log files**  
+  Execution details, errors, and summary metrics
 
 
-Outputs
-
-Target file: Contains fully validated records
-
-Exception file: Contains rejected records with rejection reasons appended
-
-Log file: Execution details, errors, and summary metrics
-
-Notes
+## Notes
 
 This project intentionally avoids database dependencies to focus on:
 
-ETL design patterns
-
-Validation strategies
-
-Modular Python architecture
+- ETL design patterns  
+- Validation strategies  
+- Modular Python architecture  
 
 The same framework can be extended to load data into databases, data warehouses, or APIs.
 
-Author
+---
 
-Vinay Kovera
+## Author
 
-
+**Vinay Kovera**
