@@ -46,14 +46,19 @@ Row-Level Validation
 Record Routing
    ├── Valid Records   → Target CSV
    └── Invalid Records → Exception CSV (with reject reason)
-
 ```
 ---
+## Design Decisions
 
+- Generator-based file reading is used to support large files without loading them into memory.
+- Validation logic is split into file, schema, and row layers to isolate concerns and simplify extensibility.
+- The pipeline is config-driven to avoid hardcoded rules and enable reuse across datasets.
+- Logging is centralized and module-specific to improve observability and debugging in batch workflows.
+
+---
 ## Project Structure
 
 ```text
-
 python_etl_callcenter/
 │
 ├── scripts/          # Modular, production-ready ETL pipeline
