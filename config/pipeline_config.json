@@ -4,17 +4,30 @@
     "environment": "dev"
   },
 
-  "paths": {
-    "source_dir": "/Users/Vinay/Python_training/python_etl_callcenter/src_files",
-    "source_filename": "call_center_raw.csv",
+  "storage": {
+    "type": "s3",
 
-    "target_dir": "/Users/Vinay/Python_training/python_etl_callcenter/output/target",
-    "target_filename": "call_center_clean.csv",
+    "s3": {
+      "bucket": "vinay-callcenter-etl-dev",
 
-    "exception_dir": "/Users/Vinay/Python_training/python_etl_callcenter/output/exception",
-    "exception_filename": "call_center_reject.csv",
+      "source_key": "source/call_center_raw.csv",
+      "target_key": "target/call_center_clean.csv",
+      "exception_key": "exception/call_center_reject.csv",
+      "log_prefix": "logs/"
+    },
 
-    "log_dir": "/Users/Vinay/Python_training/python_etl_callcenter/logs"
+    "local": {
+      "source_dir": "/Users/Vinay/Python_training/python_etl_callcenter/src_files",
+      "source_filename": "call_center_raw.csv",
+
+      "target_dir": "/Users/Vinay/Python_training/python_etl_callcenter/output/target",
+      "target_filename": "call_center_clean.csv",
+
+      "exception_dir": "/Users/Vinay/Python_training/python_etl_callcenter/output/exception",
+      "exception_filename": "call_center_reject.csv",
+
+      "log_dir": "/Users/Vinay/Python_training/python_etl_callcenter/logs"
+    }
   },
 
   "logging": {

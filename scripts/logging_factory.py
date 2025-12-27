@@ -1,7 +1,7 @@
 import logging 
 
 def get_module_logger(module_name,pipeline_config):
-    log_dir=pipeline_config["paths"]["log_dir"]
+    log_dir=pipeline_config["storage"]["local"]["log_dir"]
     default_log_level=pipeline_config["logging"]["default_level"]
     level = getattr(logging, default_log_level.upper(), logging.DEBUG)
 

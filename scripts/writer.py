@@ -2,18 +2,17 @@ import logging
 from pathlib import Path
 import csv
 
+
 logger=logging.getLogger(__name__)
 
 def create_excp_def(excp_fil_dir,fields):
-    with open(excp_fil_dir,'a',newline='') as edef:
-        edef.truncate()
+    with open(excp_fil_dir,'w',newline='') as edef:
         writer = csv.writer(edef)
         writer.writerow(fields)
         logger.debug(f"exception file defnition successfully created")
 
 def create_tgt_def(tgt_fil_dir,fields):
-    with open(tgt_fil_dir,'a',newline='') as tdef:
-        tdef.truncate()
+    with open(tgt_fil_dir,'w',newline='') as tdef:
         writer = csv.writer(tdef)
         writer.writerow(fields)
         logger.debug(f"target file defnition successfully created")
@@ -34,6 +33,3 @@ def writer_target(tgt_fil_dir,fields):
         writer.writerow(fields)
         logger.info(f"record loaded to Target file successfully")
 
-
-
-        
