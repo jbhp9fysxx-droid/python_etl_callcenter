@@ -10,15 +10,39 @@ separation of concerns.
 
 ---
 
+## Why This Project?
+
+This project was built to simulate real-world data engineering challenges commonly encountered in production batch pipelines, including:
+
+- Processing large CSV files efficiently without loading entire datasets into memory
+- Detecting and handling data quality issues through layered validation strategies
+- Working with object storage systems such as Amazon S3 alongside local file systems
+- Designing ETL pipelines that are modular, extensible, and reusable across datasets and environments
+
+The primary goal was to gain hands-on experience with how production-grade ETL pipelines are **structured, validated, observed, and operated**, using Python as a data engineering tool.
+
+---
+
 ## Key Features
 - Config-driven execution (no hardcoded paths or rules)
+- Pluggable storage support:
+  - Local filesystem
+  - Amazon S3 (object storage)
 - Layered validation approach:
   - File-level validation
   - Schema/header validation
   - Row-level data validation
+- Generator-based streaming for memory-efficient processing
 - Structured logging per module
 - Exception handling with reject reasons
 - Modular architecture (reader / validations / writer / main)
+
+## Future Enhancements
+
+- Partitioned data layout for efficient rewrites
+- Hash-based bucketing for partial updates
+- Integration with table formats like Delta Lake or Apache Hudi
+- Distributed execution using Apache Spark or AWS Glue
 
 ---
 
@@ -28,7 +52,8 @@ separation of concerns.
 The pipeline follows a validation-first, routing-second design:
 
 ```text
-Source CSV
+Source Data
+(Local CSV or S3 Object)
    |
    v
 File-Level Validation
@@ -44,9 +69,36 @@ Row-Level Validation
    |
    v
 Record Routing
-   ├── Valid Records   → Target CSV
-   └── Invalid Records → Exception CSV (with reject reason)
+   ├── Valid Records   → Local Target CSV
+   └── Invalid Records → Local Exception CSV
+                                |
+                                v
+                       (Optional S3 Upload)
+
 ```
+---
+
+## Storage Design (Local vs S3)
+
+This framework supports both **local filesystem** and **Amazon S3** as storage backends, controlled via configuration.
+
+### Local Storage
+- Source, target, and exception files are read and written directly to disk.
+- Supports iterative development and testing.
+- Uses append semantics for record-level processing.
+
+### Amazon S3 (Object Storage)
+- Source data is streamed from S3 using the object key.
+- Target and exception outputs are first written locally.
+- Final outputs are uploaded to S3 as full object overwrites.
+
+**Design Rationale:**
+- S3 is an object store (not a filesystem) and does not support in-place appends.
+- Writing locally first simplifies validation, auditing, and retry logic.
+- Full-object overwrite ensures idempotent batch execution.
+
+This design mirrors common data lake ingestion patterns used in production data platforms.
+
 ---
 ## Design Decisions
 
@@ -69,6 +121,7 @@ python_etl_callcenter/
 │ ├── schema_validations/
 │ ├── row_validations/
 │ ├── writer/
+│ ├── s3_utils.py      # S3 upload utilities
 │ ├── logging_factory.py
 │ └── config_loader.py
 │
@@ -158,7 +211,8 @@ This project intentionally avoids database dependencies to focus on:
 
 - ETL design patterns  
 - Validation strategies  
-- Modular Python architecture  
+- Modular Python architecture
+- The S3 integration models object-store semantics rather than database-style row-level updates.  
 
 The same framework can be extended to load data into databases, data warehouses, or APIs.
 
