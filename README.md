@@ -19,7 +19,7 @@ This project was built to simulate real-world data engineering challenges common
 - Working with object storage systems such as Amazon S3 alongside local file systems
 - Designing ETL pipelines that are modular, extensible, and reusable across datasets and environments
 
-The primary goal was to gain hands-on experience with how production-grade ETL pipelines are **structured, validated, observed, and operated**, using Python as a data engineering tool.
+The primary goal was to gain hands-on experience with how production-grade ETL pipelines can be **structured, validated, observed, and operated**, using Python as a core data engineering tool.
 
 ---
 
