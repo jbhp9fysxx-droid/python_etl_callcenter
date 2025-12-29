@@ -66,12 +66,12 @@ def main():
             logger.error(f"Unsupported storage type: {storage_type}")
             sys.exit() 
         
-        # call file naming format validator function
+        # callcenter file naming format validator function
         src_reject_flag, src_reject_reason=validate_filename(filename_to_validate,exp_fil_len,exp_fil_ext)
         
 
         if src_reject_flag==1:
-            logger.error("File is invalid and unable to pricess for the below reasons:")
+            logger.error("File is invalid and unable to process for the below reasons:")
             for src_rej_reason in src_reject_reason:
                 logger.error(f"{src_rej_reason}")
             logger.error("Pipeline terminated due to invalid source file naming format")
@@ -101,6 +101,9 @@ def main():
             record_stream = s3_reader(s3_bucket, src_file_key)
             
         for record in record_stream:
+            if record is None:
+                logger.error("Terminating pipelins since no file found in source")
+                sys.exit()
             fields=record.strip()
             fields=fields.split(',')
             tgt_header_fields=fields.copy()
