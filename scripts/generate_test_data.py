@@ -28,7 +28,7 @@ with open(OUTPUT_FILE, "w", newline="") as f:
 
     call_id = 1
 
-    # 1️⃣ Valid records
+    # 1️ Valid records
     for _ in range(7000):
         writer.writerow([
             call_id,
@@ -40,7 +40,7 @@ with open(OUTPUT_FILE, "w", newline="") as f:
         ])
         call_id += 1
 
-    # 2️⃣ Missing mandatory fields
+    # 2️ Missing mandatory fields
     for _ in range(1000):
         writer.writerow([
             "",  # missing call_id
@@ -52,7 +52,7 @@ with open(OUTPUT_FILE, "w", newline="") as f:
         ])
         call_id += 1
 
-    # 3️⃣ Invalid time format
+    # 3️ Invalid time format
     for _ in range(800):
         writer.writerow([
             call_id,
@@ -64,7 +64,7 @@ with open(OUTPUT_FILE, "w", newline="") as f:
         ])
         call_id += 1
 
-    # 4️⃣ Non-numeric IDs
+    # 4️ Non-numeric IDs
     for _ in range(600):
         writer.writerow([
             call_id,
@@ -76,7 +76,7 @@ with open(OUTPUT_FILE, "w", newline="") as f:
         ])
         call_id += 1
 
-    # 5️⃣ Invalid status
+    # 5️ Invalid status
     for _ in range(400):
         writer.writerow([
             call_id,
@@ -88,7 +88,7 @@ with open(OUTPUT_FILE, "w", newline="") as f:
         ])
         call_id += 1
 
-    # 6️⃣ Malformed rows (missing column)
+    # 6️ Malformed rows (missing column)
     for _ in range(200):
         writer.writerow([
             call_id,
